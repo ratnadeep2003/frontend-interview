@@ -1,0 +1,115 @@
+What is Swift and what are its main characteristics?
+Difference between let and var.
+What is type inference?
+What is an optional?
+Difference between if let and guard let.
+What is optional chaining?
+What is force unwrapping?
+Struct vs class.
+Value type vs reference type.
+What is copy-on-write?
+What is mutating?
+What are associated values in enums?
+Raw values vs associated values.
+What is a closure?
+What is @escaping?
+What is a capture list?
+How does ARC work?
+Strong vs weak vs unowned.
+What is a retain cycle?
+What is a protocol?
+Protocol extension vs class inheritance.
+What is associatedtype?
+Generics vs Any.
+What are some and any?
+What is Codable?
+What is throws / Result?
+What are async and await?
+What is an actor?
+What is @MainActor?
+How does Swift prevent data races?
+
+
+imp concepts:
+1. Optionals
+2. Struct vs class
+3. Value vs reference semantics
+4. Closures + @escaping + capture lists
+5. ARC + weak/unowned + retain cycles
+6. Protocols + protocol extensions
+7. Generics + associatedtype + any/some
+8. Codable + networking
+9. async/await + Task + actors
+10. MainActor + Sendable + data-race safety
+
+
+swift ui:
+1. What is SwiftUI?
+2. Declarative vs imperative UI?
+3. Why are SwiftUI Views structs?
+4. What is the View protocol?
+5. What does `some View` mean?
+6. What is `body`?
+7. What is @State?
+8. What is @Binding?
+9. What does `$` mean?
+10. @State vs @Binding?
+11. @StateObject vs @ObservedObject?
+12. What is ObservableObject?
+13. What is @Published?
+14. What is @Observable?
+15. What is @Bindable?
+16. Old Observation vs new Observation?
+17. What is @Environment?
+18. What is @EnvironmentObject?
+19. What is ForEach?
+20. Why is Identifiable important?
+21. List vs ScrollView vs LazyVStack?
+22. Why does modifier order matter?
+23. What is NavigationStack?
+24. NavigationStack vs NavigationPath?
+25. How does programmatic navigation work?
+26. Sheet vs navigation?
+27. How do you show an alert?
+28. What is .task?
+29. .task vs .onAppear?
+30. How do you make an API call from SwiftUI?
+31. How do you handle loading/error states?
+32. How do you update UI after async work?
+33. What is @MainActor?
+34. What is ViewBuilder?
+35. What is AnyView?
+36. What are result builders?
+37. How does SwiftUI observe state changes?
+38. How do you avoid unnecessary work in body?
+39. How do you inject dependencies?
+40. How do you test a SwiftUI ViewModel?
+41. How do SwiftUI and UIKit work together?
+42. What is UIHostingController?
+43. What is UIViewRepresentable?
+44. What is UIViewControllerRepresentable?
+45. How would you architect a production SwiftUI app?
+---------------------------------------------------------------------------------------------------------
+
+Sets: better than arrays, cause they run faster than arrays and the ordering dosent matter in it
+
+enums: set of  named values we can use 
+    enum Weekday {
+        case monday, tuesday, wednesday
+    }
+    var day1 = Weekday.monday
+---------------------------------------------------------------------------------------------------------
+
+for in loop:
+
+let platforms = ["ios", "watchos", "tvos"];
+for os in platforms {
+    print("swift can run in \(os)")
+}
+
+for i in 1...12 {
+    print("5 x \(i) = \(5*i)")
+}
+---------------------------------------------------------------------------------------------------------
+
+Handling erros in functions :
