@@ -1,0 +1,33 @@
+Terminal Based Coding Agent
+
+1) it is as an interactive ReAct (Reason + Act) Agent loop.
+2) architecture : the CLI presentation, 
+                  the LLM provider implementations, 
+                  and the file-system tool execution, creating an autonomous agent capable of exploring and modifying a local codebase
+
+Structure:
+1. The Entry Point & Core Flow (src/index.ts)
+    When executing the agent, startAgentApp() initializes a continuous Read-Eval-Print Loop (REPL) using Node's native readline module.
+
+    When user enters a prompt: The prompt passes through expandMentions to inline any files tagged with
+    The ReAct Loop: A while (turnCount < maxTurns) loop begins. It calls provider.generateStep(), requesting the LLM's next move. generateStep() is based on buildSystemInstruction
+
+    If the LLM returns toolCalls-> this is done by execute tool-> read edit write list bash
+
+2. Module & Function Breakdown
+    • The Workspace Context (src/workspace.ts)
+    • getRoot & setRoot: Tracks and updates the current working directory, allowing users to switch projects mid-session using
+    • buildTree: Recursively walks the director
+    • expandMentions: Uses regex to find patterns like @src/config.ts in user prompts
+    • schemas.ts: Contains the strict JSON schemas defining what tools are available
+    • executeTool: It takes the tool name and arguments provided by the LLM and executes actual system operations
+    •  The AI Providers (src/providers/): gemini.ts & anthropic.ts
+
+3. How prompt 2+2 is executed:
+    1) index.ts captures the string "whats 2+2
+    2) expandMentions scans it, finds no @path tags, and leaves it untouched
+    3) provider.addUserMessage() pushes this simple text into the active provider's chat history.
+    4) The system sends the API request containing the system prompt (which includes your workspace tree), the previous chat history, and the new "whats 2+2" message to Claude or Gemini-> i dont understand how this happens
+    5) The LLM evaluates the prompt. Because it is a basic arithmetic question, the LLM determines it does not need to invoke run_bash or read_file to answer it. which function does this ?
+    6) The API returns a payload with the text "4" and an empty tool call list,  which function does this
+    
