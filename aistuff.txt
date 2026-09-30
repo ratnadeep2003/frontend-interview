@@ -1,0 +1,33 @@
+Q) What's the difference between an LLM and a traditional API?
+    an llm generates output based on probability from context, traditional api executes a function based on the method 
+     a traditional API is deterministic while an LLM is probabilistic
+
+Q) What are tokens?
+    tokens are the basic bite-sized pieces of text that an LLM reads and processes, an llm breaks your text promt into fragments called tokens 
+        1 token is roughly equal to 4 characters.
+        1 token is roughly equal to 0.75 words.
+        Therefore, 100 tokens is approximately 75 words.
+
+Q) What is rag ?
+    Retrieval augmented generation: is the specific data pipeline that makes the AI smart enough to answer questions accurately using your own private files or data
+
+    The 3 Steps of a RAG Pipeline: when user types message into an ai agent, rag executes these 3 Steps
+    * Retrieval: The system takes the user's question and searches a special repository called a Vector Database (where your company's PDFs, docs, or website articles are stored). It pulls out only the text snippets that match the user's intent.
+    * Augmentation: The system dynamically merges the user's original question with those extracted text snippets into a single, comprehensive mega-prompt.
+    * Generation: The final augmented prompt is sent to the LLM. The LLM reads the attached data and generates a clean, conversational response grounded completely in facts.
+
+Q) What are embeddings?
+    embeddings represent data as vectors in a high-dimensional numerical space
+    "Apple iPhone" ->  [0.12, -0.43, 0.87, ...]
+    Semantically similar things tend to be closer in vector space.
+
+Q) what is halucination: 
+    hallucination is when an AI or agent confidently generates false, inaccurate, or completely fabricated info that is not supported by real-world data or the context it was given
+
+Q) What's function/tool calling?
+    is a feature that allows an LLM to control and interact with the real world by connecting to traditional APIs and databases
+
+Q) Design an AI chatbot that can answer questions about a company's internal documents. what would be the flow ? 
+    documets->embedding->vector db->retrive----------->->llm->answer prompt 
+    user->prompt->retrive------------------------------>
+    

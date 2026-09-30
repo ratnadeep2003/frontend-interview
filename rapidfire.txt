@@ -1,0 +1,8 @@
+Q) whats null vs undefined answer in short ? 
+    is it absence of value for a variable and a variable defined but not assigned to any value
+
+Q) whats cors?
+    Cross-Origin Resource Sharing: decides if app on 1 domain tries to acces resources from other domain 
+
+Q) whats rest ?
+    Representational State Transfer, it is an architectural style or a set of design rules for building web APIs that allow two computer systems to communicate

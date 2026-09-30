@@ -1,0 +1,136 @@
+1) JS/TS
+difference between var let const: 
+    var:  are function-scoped, meaning they are only contained by the function they are in
+    let: block scoped, used to define variables, can be reassigned 
+    const: block scoped, used to define constants, cannot be reassigned 
+
+    closure: an inner function remembers and can access variables from its outer function
+        example: 
+        function createGreetBot(botName) {
+        // Outer function variable
+        return function(userName) {
+            // Inner function has access to 'botName' even after createGreetBot finishes
+            console.log(`Hello ${userName}, I am ${botName}.`);
+        };
+        }
+
+        // 1. Initialize the outer function
+        const robbie = createGreetBot("Robbie the Robot"); 
+
+        // 2. Call the inner function
+        robbie("Alice"); // Outputs: "Hello Alice, I am Robbie the Robot."
+
+    callback: function passed into another function as an argument 
+---------------------------------------------------------------------------------------------------------
+
+Event loop: mechanism that handles asynchronous task allowing js to perform non blocking tasks 
+consist of :  five key components: the Call Stack, Web APIs, the MacroTask Queue, the MicroTask Queue, and the Event Loop itself.
+
+call stack: js keeps track of what code is currently executing, functions are pushed and poped after their execution, just like a stack 
+
+webapis: features provided by the broser (settimeout), that hnadle time consuming operations 
+
+macro tasks : a waiting room for async callbacks
+
+micro tasks:  high-priority waiting room specifically for Promises
+
+event loop: continously checks if the call stack is empty, if it is empty it clears micro task first, and then pushes first task from macro to the queue 
+---------------------------------------------------------------------------------------------------------
+
+React:
+Q) difference between state and prop: 
+    prop: properties passed from parent to child which is read only 
+    state: state is a React component's short-term memory, used to hold data that can change over time, and whenever that data changes, React automatically re-renders
+
+Q) wha tcauses a react component to re-render:
+    component: a reusable building block for websites ui
+    causes of re-render: state change, parent re-render, exteral re-load or trigger updates 
+
+    re-render doesn't necessarily mean the DOM is fully recreated. React compares the new tree against the previous one.--> in simple words: 
+    Re-render = React recalculating the virtual blueprint in JavaScript memory.
+    Reconciliation = React comparing the new blueprint to the old blueprint to find differences.
+    DOM Update = React making surgical, pinpoint updates to the real browser screen based on those differences.
+
+Q) Why do we need keys when rendering lists?
+    key props act as unique id for each item in a list, allowing Reconciliation process to track which exact element in list gets updated 
+
+Q) whats useEffect ?
+    useEffect is a React hook that lets you run code in response to side effects. side effects can be fetching, settimeout etc. 
+    it has 2 arguments: (diff bn parameter and argument: parameter is variable defined in function, argument is the value passed to that function)
+    2 arugments: 1st being a callback function containing the code you want to run
+    2nd being a depedency array based on when or on what criteria you want to run it 
+
+        import { useEffect, useState } from 'react';
+
+        function UserProfile() {
+        const [user, setUser] = useState(null);
+
+        useEffect(() => {
+            // 1. The Code: Fetch data when the component loads
+            fetch('https://example.com')
+            .then(res => res.json())
+            .then(data => setUser(data));
+
+        }, []); // 2. The Dependency Array: Controls when this triggers-> empty means run only ones
+        }
+
+        useEffect(() => { /* Code */ }, [userId]);-> means run everytime userId changes 
+
+
+        useState: takes 1 parameter as initial value and it returns an array with two items: the read-only variable and the updater function.
+
+Q) Whats usememo and usecallback:
+    usememo: caches the calculated value (result of a funciton)
+    usecallback: caches the funciton itself
+
+Q) whats the difference between controlled and uncontrolled inputs:
+    controlled: react owns the value
+    uncontrolled: dom owns the value 
+
+---------------------------------------------------------------------------------------------------------
+
+NextJs
+Q) What's the difference between a Server Component and Client Component?
+    Server side components: runs on the server, directly access server side resource, cannot use react hooks like usestate,
+
+    by default all components are Server Components, to make it client side it  needs to explicilty mention "use client" at the top 
+
+Q) explain ssr, csr, ssg
+    CSR (Client-Side Rendering): website sends html page, client browser has to download js and render ui
+    SSR (Server-Side Rendering): server builds the full HTML page on the fly, and sends a complete page back to the client browser
+    SSG (Static Site Generation): server generates all html file and stores it on cdn and delivers it on users request
+
+Q) What's the difference between Next.js Server Actions and API routes?
+    the core difference between how you communicate between client and server 
+    API routes: are traditional http endpoints written in backend and fetched using fetch() or axios
+    Server actions: are async js functions that run on the server but can be directly called by client components bypassing the need for fetch 
+
+    fetch('/api/data', { method: 'POST' }) and await myActionFunction()
+
+Q0 Where should you fetch data in Next.js?
+    directly from the server 
+
+Q) Explain Next.js caching.
+    caching: used to load application as fast as possible 
+    In Next.js (App Router), the framework splits its caching strategy into four distinct layers.
+    1. Request Memoization: The exact values of identical fetch requests inside a single page are cached
+    2. Data Cache: API data and database results across multiple user visits are cached here 
+    3. Full Route cache: complete html code is cached
+    4. Router cache: caches the structural page layout, example: When you scroll down a page and hover over or see <Link> tags, Next.js automatically pre-downloads those destinations in the background.
+---------------------------------------------------------------------------------------------------------
+
+Frontend Architecture
+
+Q) You're building a dashboard with 50+ components. How would you structure it?
+    based on seperation of concern, seperating components/ui , lib/services and all 
+
+Q) How would you optimize a slow React application?:
+    2 main reasons for slow application might be: unnecessary re-renders and heavy calculations 
+
+Q) What happens when you enter https://example.com in your browser?
+    Step 1: The DNS Lookup
+    Step 2: The TCP Handshake (Establishing a Connection) via 3 way handshake of SYN, SYN-ACK and ACK 
+    Step 3: The TLS/SSL Handshake: since its https, the connection must be secured 
+    Step 4: The HTTP Request: with a secure connection established, the browser sends an HTTP GET request to the server. 
+    Step 5: The Server Response
+    Step 6: Browser Rendering: browser receives the raw files and instantly begins construction:
